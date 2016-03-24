@@ -107,7 +107,7 @@ public class DeploymentGuard {
 		
 		//shutdown?
 		if(forceShutdown){
-			log.warn("Shut down requested. Shuting down the system.");
+			log.warn("Shut down requested. Shutting down the system.");
 			try {
 				jmx.forceShutdown();
 			} catch (Exception e) {
