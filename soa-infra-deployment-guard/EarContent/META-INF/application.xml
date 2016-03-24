@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application 
+id="soa-infra-deployment-guard_v1.0" 
+version="1.4" 
+xmlns="http://java.sun.com/xml/ns/j2ee" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/application_1_4.xsd">
+	
+	<display-name>soa-infra-deployment-guard</display-name>
+	
+	<module>
+		<java>deployment-guard.jar</java>
+	</module>
+
+</application>
