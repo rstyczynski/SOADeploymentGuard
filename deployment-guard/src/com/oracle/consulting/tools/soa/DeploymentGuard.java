@@ -26,24 +26,24 @@ public class DeploymentGuard {
 		Boolean forceShutdown = false;
 		String skipCheckOnTheseNodes = System.getProperty("soaguardSkipCheckOn", "AdminServer");
 				
-		log.warn("SOA deployment guard started.");
+		log.info("SOA deployment guard started.");
 		
 		try {
 			thisNode = jmx.getServer();
 			masterNode = jmx.getClusterMaster();
-			log.warn("Cluster master node:" + masterNode);
+			log.info("Cluster master node:" + masterNode);
 			
 			isRunningOnMaster = thisNode.equals(masterNode);
 		
 		} catch (Exception e) {
-			log.error("Error getting server name or discoverig master node name. Will shut down. Reason:" + e.getMessage(), e);
+			log.fatal("Error getting server name or discoverig master node name. Will shut down. Reason:" + e.getMessage(), e);
 			giveup = true;
 			forceShutdown = true;
 		}
 		
 		if(! giveup) {
 			if (! (skipCheckOnTheseNodes.indexOf(thisNode.name) == -1)) {
-				log.warn("Server start procedure released due to blacklisted host.");	
+				log.info("Server start procedure released due to blacklisted host.");	
 				giveup = true;
 				forceShutdown = false;				
 			}
@@ -64,14 +64,14 @@ public class DeploymentGuard {
 						if(soaStatusMaxWaitCnt > 0) {
 						
 							if (e.getMessage() != null)
-								log.warn("SOA infrastructure on master node is not ready. Reason:" + e.getMessage() + " Will retry " + soaStatusMaxWaitCnt + " more times");
+								log.info("SOA infrastructure on master node is not ready. Reason:" + e.getMessage() + " Will retry " + soaStatusMaxWaitCnt + " more times");
 							else
-								log.warn("SOA infrastructure on master node is not ready. Will retry " + soaStatusMaxWaitCnt + " more time(s).");
+								log.info("SOA infrastructure on master node is not ready. Will retry " + soaStatusMaxWaitCnt + " more time(s).");
 						
 						} else {
 							
 							//this the last time we see the error. Report error and force shutdown
-							log.error("Timeout waiting for SOA readiness on master server. Will shut down.", e);
+							log.fatal("Timeout waiting for SOA readiness on master server. Will shut down.", e);
 							forceShutdown = true;
 						}
 						
@@ -87,7 +87,7 @@ public class DeploymentGuard {
 				}//wait for soa
 				
 				if(soaStatus) {
-					log.warn("SOA Platform on master node is running and accepting requests. Server start procedure released.");
+					log.info("SOA Platform on master node is running and accepting requests. Server start procedure released.");
 				}//soa status
 				
 			} else {
@@ -107,7 +107,7 @@ public class DeploymentGuard {
 		
 		//shutdown?
 		if(forceShutdown){
-			log.warn("Shut down requested. Shutting down the system.");
+			log.fatal("Shut down requested. Shutting down the system.");
 			try {
 				jmx.forceShutdown();
 			} catch (Exception e) {
