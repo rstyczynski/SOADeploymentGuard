@@ -44,5 +44,9 @@ Number of tests were performed to validate functionality
 [x] master delayed, secondary timed out - shutdown
 [x] start on AdminServer
 
+#Changes
+1.0 - initial
+1.1 - modified logging levels. info - normal meesages; warn - waiting messages; fatal - shutdown notification
+
 #Todo
 (none)
