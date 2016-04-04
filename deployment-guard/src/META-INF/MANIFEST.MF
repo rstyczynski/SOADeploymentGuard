@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Implementation-Title: SOA deployment guard
-Implementation-Version: 1.0
+Implementation-Version: 1.1
 Implementation-Vendor: Oracle Consulting, ryszard.styczynski@oracle.com
